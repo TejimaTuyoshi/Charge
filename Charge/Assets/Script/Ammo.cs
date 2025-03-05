@@ -1,3 +1,4 @@
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,8 +35,16 @@ public class Ammo : MonoBehaviour
         {
             Debug.Log("”­ŽË!");
             isRemove = false;
-            rb.AddForce(-power, 0, 0, ForceMode.Impulse);
+            rb.AddForce(-power, power/3, 0, ForceMode.Impulse);
             power = 0;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("Wall"))
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
