@@ -1,12 +1,13 @@
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Ammo : MonoBehaviour
 {
+    Ammo myself;
     [SerializeField] private InputActionReference _hold;
     [SerializeField] bool isHold = false;
     [SerializeField] bool isRemove = false;
+    [SerializeField] bool isReload = false;
     private float power;
     Rigidbody rb;
     private void Awake()
@@ -20,6 +21,8 @@ public class Ammo : MonoBehaviour
         _hold.action.Enable();
 
         power = 0;
+
+        myself = GetComponent<Ammo>();
 
         rb = GetComponent<Rigidbody>();
     }
@@ -38,13 +41,19 @@ public class Ammo : MonoBehaviour
             rb.AddForce(-power, power/3, 0, ForceMode.Impulse);
             power = 0;
         }
+
+        if (isReload)
+        {
+            this.rb.constraints = RigidbodyConstraints.FreezeRotationX;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.CompareTag("Wall"))
         {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+            this.rb.constraints = RigidbodyConstraints.FreezeAll;
+            myself.enabled = false;
         }
     }
 
