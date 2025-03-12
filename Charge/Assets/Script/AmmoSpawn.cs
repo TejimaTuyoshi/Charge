@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class AmmoSpawn : MonoBehaviour
 {
     [SerializeField] private InputActionReference _reload;
+    [SerializeField] new MeshRenderer renderer;
     [SerializeField] GameObject ammo;
     [SerializeField] bool isReload = false;
     [SerializeField] bool isReady = false;
@@ -36,6 +37,7 @@ public class AmmoSpawn : MonoBehaviour
         {
             isReload = true;
             isReady = false;
+            renderer.material.color = Color.blue;
         }
     }
 

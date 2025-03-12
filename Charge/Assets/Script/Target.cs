@@ -3,11 +3,13 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     new BoxCollider collider;
-    new MeshRenderer renderer;
+    [SerializeField] new MeshRenderer renderer;
+    ScoreText scoreText;
+
     void Start()
     {
         collider = GetComponent<BoxCollider>();
-        renderer = GetComponent<MeshRenderer>();
+        scoreText = GameObject.FindAnyObjectByType<ScoreText>();
         renderer.material.color = Color.blue;
     }
     private void OnCollisionEnter(Collision other)
@@ -15,7 +17,7 @@ public class Target : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) 
         {
             renderer.material.color = Color.red;
-            collider.enabled = false;
+            scoreText.Plus();
         }
     }
 }
