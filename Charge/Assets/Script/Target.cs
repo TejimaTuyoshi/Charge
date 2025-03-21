@@ -2,22 +2,21 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    new BoxCollider collider;
-    [SerializeField] new MeshRenderer renderer;
     ScoreText scoreText;
-
+    TargetSpawn targetSpawn;
     void Start()
     {
-        collider = GetComponent<BoxCollider>();
         scoreText = GameObject.FindAnyObjectByType<ScoreText>();
-        renderer.material.color = Color.blue;
+        targetSpawn = GameObject.FindAnyObjectByType<TargetSpawn>();
     }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player")) 
         {
-            renderer.material.color = Color.red;
+            targetSpawn.TargetHit();
             scoreText.Plus();
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
