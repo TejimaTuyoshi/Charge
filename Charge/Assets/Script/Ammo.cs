@@ -4,11 +4,13 @@ using UnityEngine.InputSystem;
 public class Ammo : MonoBehaviour
 {
     Ammo myself;
+    ScoreText scoreText;
     [SerializeField] private InputActionReference _hold;
     [SerializeField] bool isHold = false;
     [SerializeField] bool isRemove = false;
     [SerializeField] bool isReload = false;
     private float power;
+    public float sendPowerText;
     Rigidbody rb;
     private void Awake()
     {
@@ -25,12 +27,17 @@ public class Ammo : MonoBehaviour
         myself = GetComponent<Ammo>();
 
         rb = GetComponent<Rigidbody>();
+
+        scoreText = GameObject.FindAnyObjectByType<ScoreText>();
+
     }
     private void Update()
     {
         if (isHold)
         {
             power += 0.01f;
+            sendPowerText = power;
+            scoreText.Shot();
             Debug.Log(power);
         }
 

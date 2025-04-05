@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1918313564782884686}
   - component: {fileID: 900475278405563414}
   m_Layer: 0
-  m_Name: Ammo
+  m_Name: HeavyAmmo
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 21ef34c57b3477041b1272647017be5e, type: 2}
+  - {fileID: 2100000, guid: 72e1729e58a367241991630bc682f1e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   isHold: 0
   isRemove: 0
   isReload: 0
+  sendPowerText: 0
 --- !u!54 &900475278405563414
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196237006171686930}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

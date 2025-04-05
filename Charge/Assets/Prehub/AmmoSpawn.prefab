@@ -486,9 +486,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2608d25c96c11b4b8da5448642d0690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: {fileID: 0}
-  isReload: 0
   _reload: {fileID: -6421287811308203100, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  ammos: 0
+  simpleAmmo: {fileID: 8196237006171686930, guid: d40e3eed3f69fbb48976fdcd196bc75e, type: 3}
+  lightAmmo: {fileID: 8196237006171686930, guid: 8a71c6fc7b2b65f439fbba2b30da46e2, type: 3}
+  heavyAmmo: {fileID: 8196237006171686930, guid: ee935a060b8fea6488b6581c3c96aabf, type: 3}
+  isReload: 0
+  isReady: 0
 --- !u!1 &4945138485978340760
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private InputActionReference _mouseLeft;
     [SerializeField] AmmoSpawn ammoSpawn;
+    [SerializeField] ScoreText scoreText;
+
 
     private void Awake()
     {
@@ -18,5 +20,6 @@ public class Player : MonoBehaviour
     private void OffHold(InputAction.CallbackContext context)
     {
         ammoSpawn.Ready();
+        scoreText.Reload();
     }
 }
