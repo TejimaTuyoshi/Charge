@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public enum InstanceAmmos
 {
@@ -14,6 +15,7 @@ public class AmmoSpawn : MonoBehaviour
     [SerializeField] GameObject simpleAmmo;
     [SerializeField] GameObject lightAmmo;
     [SerializeField] GameObject heavyAmmo;
+    [SerializeField] Text typeText;
     [SerializeField] bool isReload = false;
     [SerializeField] bool isReady = false;
 
@@ -29,6 +31,7 @@ public class AmmoSpawn : MonoBehaviour
     }
     private void Update()
     {
+        typeText.text = $"NextType:{ammos}";
         if (isReload)
         {
             if (ammos == InstanceAmmos.Simple){ Instantiate(simpleAmmo, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity); }
