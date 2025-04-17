@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] GameObject end;
     [SerializeField] Text text;
     [SerializeField] float time = 20f;
     [SerializeField] bool isStart = false;
@@ -16,6 +17,7 @@ public class Timer : MonoBehaviour
         {
             isStart = false;
             time = 0;
+            end.SetActive(true);
         }
     }
 
