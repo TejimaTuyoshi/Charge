@@ -38,12 +38,10 @@ public class Ammo : MonoBehaviour
             power += 0.01f;
             sendPowerText = power;
             scoreText.Shot();
-            Debug.Log(power);
         }
 
         else if(isRemove)
         {
-            Debug.Log("”­ŽË!");
             isRemove = false;
             rb.AddForce(-power, power/3, 0, ForceMode.Impulse);
             power = 0;
