@@ -3,15 +3,19 @@ using UnityEngine.InputSystem;
 
 public class Ammo : MonoBehaviour
 {
+    TargetSpawn targetSpawn;
     Ammo myself;
     ScoreText scoreText;
+    Target target;
     [SerializeField] private InputActionReference _hold;
-    [SerializeField] bool isHold = false;
-    [SerializeField] bool isRemove = false;
-    [SerializeField] bool isReload = false;
-    private float power;
-    public float sendPowerText;
+    [SerializeField] bool _isHold = false;
+    [SerializeField] bool _isRemove = false;
+    [SerializeField] bool _isReload = false;
+    private float _power;
+    public float _sendPowerText;
     Rigidbody rb;
+    Transform _targetTransform;
+    Vector3 _distance = new Vector3(0,0,0);
     private void Awake()
     {
         if (_hold == null) return;
@@ -22,7 +26,7 @@ public class Ammo : MonoBehaviour
 
         _hold.action.Enable();
 
-        power = 0;
+        _power = 0;
 
         myself = GetComponent<Ammo>();
 
@@ -30,46 +34,60 @@ public class Ammo : MonoBehaviour
 
         scoreText = GameObject.FindAnyObjectByType<ScoreText>();
 
+        target = GameObject.FindAnyObjectByType<Target>();
+
+        targetSpawn = GameObject.FindAnyObjectByType<TargetSpawn>();
+
+        _targetTransform = target.transform;
     }
     private void Update()
     {
-        if (isHold)
+        Debug.Log($"{_distance}");
+        _distance.x = Mathf.Abs(this.transform.position.x - _targetTransform.position.x);
+        _distance.y = Mathf.Abs(this.transform.position.y - _targetTransform.position.y);
+        _distance.z = Mathf.Abs(this.transform.position.z - _targetTransform.position.z);
+        if (_isHold)
         {
-            power += 0.01f;
-            sendPowerText = power;
-            scoreText.Shot();
+            _power += 0.01f;
+            _sendPowerText = _power;
         }
 
-        else if(isRemove)
+        else if(_isRemove)
         {
-            isRemove = false;
-            rb.AddForce(-power, power/3, 0, ForceMode.Impulse);
-            power = 0;
+            _isRemove = false;
+            rb.AddForce(-_power, _power/3, 0, ForceMode.Impulse);
+            _power = 0;
         }
 
-        if (isReload)
+        if (_isReload)
         {
             this.rb.constraints = RigidbodyConstraints.FreezeRotationX;
         }
-    }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.CompareTag("Wall"))
+        if (_distance.x <= 0.6 && _distance.y < 1.05) 
         {
             this.rb.constraints = RigidbodyConstraints.FreezeAll;
             myself.enabled = false;
+            targetSpawn.TargetHit();
+            scoreText.Plus();
+            Destroy(target.gameObject);
+            Destroy(gameObject);
+        }
+        else if (this.transform.position.y <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
+
     private void OnHold(InputAction.CallbackContext context)
     {
-        isHold = true;
+        _isHold = true;
     }
 
     private void OffHold(InputAction.CallbackContext context)
     {
-        isHold = false;
-        isRemove = true;
+        _isHold = false;
+        _isRemove = true;
     }
 }

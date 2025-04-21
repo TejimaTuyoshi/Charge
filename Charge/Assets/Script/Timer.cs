@@ -9,7 +9,6 @@ public class Timer : MonoBehaviour
     [SerializeField] bool isStart = false;
     void Update()
     {
-        Debug.Log($"{time}");
         text.text = $"Time:{time}";
         if (isStart) { time -= Time.deltaTime; }
 

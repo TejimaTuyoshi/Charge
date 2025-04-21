@@ -17,7 +17,7 @@ public class TargetSpawn : MonoBehaviour
         if (isHit)
         {
             Random();
-            Instantiate(target, new Vector3(-num, -1, 0), Quaternion.Euler(0, 270, 0));
+            Instantiate(target, new Vector3(-num, 1, 0), Quaternion.Euler(0, 270, 0));
             isHit = false;
         }
     }
