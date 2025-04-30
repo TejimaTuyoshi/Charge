@@ -46,18 +46,6 @@ public class Ammo : MonoBehaviour
         _distance.x = Mathf.Abs(this.transform.position.x - _targetTransform.position.x);
         _distance.y = Mathf.Abs(this.transform.position.y - _targetTransform.position.y);
         _distance.z = Mathf.Abs(this.transform.position.z - _targetTransform.position.z);
-        if (_isHold)
-        {
-            _power += 0.01f;
-            _sendPowerText = _power;
-        }
-
-        else if(_isRemove)
-        {
-            _isRemove = false;
-            rb.AddForce(-_power, _power/3, 0, ForceMode.Impulse);
-            _power = 0;
-        }
 
         if (_isReload)
         {
@@ -76,6 +64,21 @@ public class Ammo : MonoBehaviour
         else if (this.transform.position.y <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isHold)
+        {
+            _power += 0.1f;
+            _sendPowerText = _power;
+        }
+        else if (_isRemove)
+        {
+            _isRemove = false;
+            rb.AddForce(-_power, _power / 3, 0, ForceMode.Impulse);
+            _power = 0;
         }
     }
 

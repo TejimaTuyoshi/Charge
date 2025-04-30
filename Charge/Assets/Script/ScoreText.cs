@@ -20,7 +20,9 @@ public class ScoreText : MonoBehaviour
         text.text = $"Score:{score}";
         powerText.text = $"Power:{power}";
         ammo = GameObject.FindAnyObjectByType<Ammo>();
-        power = ammo._sendPowerText;
+        if (!ammo){ power = 0; }
+        else { power = ammo._sendPowerText; }
+
         if (timeAddScore >= 5)
         {
             timer.Add();
