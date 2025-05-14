@@ -7,17 +7,19 @@ public class Timer : MonoBehaviour
     [SerializeField] Text text;
     [SerializeField] float time = 20f;
     [SerializeField] bool isStart = false;
-    void Update()
+
+    private void FixedUpdate()
     {
         text.text = $"Time:{time}";
         if (isStart) { time -= Time.deltaTime; }
 
-        if (time <= 0) 
+        if (time <= 0)
         {
             isStart = false;
             time = 0;
             end.SetActive(true);
         }
+
     }
 
     public void Add(){ time += 5f; }
