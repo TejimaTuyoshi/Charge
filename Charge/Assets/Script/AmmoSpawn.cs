@@ -23,8 +23,6 @@ public class AmmoSpawn : MonoBehaviour
     {
         if (_reload == null) return;
 
-        _reload.action.performed += OnReload;
-
         _reload.action.canceled += OffReload;
 
         _reload.action.Enable();
@@ -46,9 +44,6 @@ public class AmmoSpawn : MonoBehaviour
         }
     }
 
-    private void OnReload(InputAction.CallbackContext context)
-    {
-    }
     private void OffReload(InputAction.CallbackContext context)
     {
         if (isReady)

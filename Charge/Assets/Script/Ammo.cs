@@ -7,7 +7,9 @@ public class Ammo : MonoBehaviour
     Ammo myself;
     ScoreText scoreText;
     Target target;
+    SoundManager soundManager;
     [SerializeField] private InputActionReference _hold;
+    [SerializeField] bool _isStart = false;
     [SerializeField] bool _isHold = false;
     [SerializeField] bool _isRemove = false;
     [SerializeField] bool _isReload = false;
@@ -38,11 +40,12 @@ public class Ammo : MonoBehaviour
 
         targetSpawn = GameObject.FindAnyObjectByType<TargetSpawn>();
 
+        soundManager = GameObject.FindAnyObjectByType<SoundManager>();
+
         _targetTransform = target.transform;
     }
     private void Update()
     {
-        Debug.Log($"{_distance}");
         _distance.x = Mathf.Abs(this.transform.position.x - _targetTransform.position.x);
         _distance.y = Mathf.Abs(this.transform.position.y - _targetTransform.position.y);
         _distance.z = Mathf.Abs(this.transform.position.z - _targetTransform.position.z);
@@ -54,7 +57,7 @@ public class Ammo : MonoBehaviour
 
         if (_distance.x <= 0.6 && _distance.y < 1.05) 
         {
-            this.rb.constraints = RigidbodyConstraints.FreezeAll;
+            soundManager.Clear();
             myself.enabled = false;
             targetSpawn.TargetHit();
             scoreText.Plus();
@@ -63,6 +66,7 @@ public class Ammo : MonoBehaviour
         }
         else if (this.transform.position.y <= 0)
         {
+            soundManager.Miss();
             Destroy(gameObject);
         }
     }
@@ -86,11 +90,20 @@ public class Ammo : MonoBehaviour
     private void OnHold(InputAction.CallbackContext context)
     {
         _isHold = true;
+        if (_isStart)
+        {
+            soundManager.Charge();
+        }
     }
 
     private void OffHold(InputAction.CallbackContext context)
     {
         _isHold = false;
         _isRemove = true;
+        if (_isStart)
+        {
+            soundManager.Shot();
+        }
     }
+    public void StartGame() {_isStart = true ;}
 }

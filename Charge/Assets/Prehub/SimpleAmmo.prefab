@@ -123,9 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hold: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  isHold: 0
-  isRemove: 0
-  isReload: 0
+  scoreManager: {fileID: 6713559479228724227, guid: b0ac3616ed295304287c5922946858c2, type: 3}
+  _isHold: 0
+  _isRemove: 0
+  _isReload: 0
+  _sendPowerText: 0
 --- !u!54 &900475278405563414
 Rigidbody:
   m_ObjectHideFlags: 0
