@@ -41,6 +41,7 @@ public class AmmoSpawn : MonoBehaviour
             if (num == 0) { ammos = InstanceAmmos.Simple; }
             else if (num == 1) { ammos = InstanceAmmos.Light; }
             if (num == 2) { ammos = InstanceAmmos.Heavy; }
+            isReload = false;
         }
     }
 

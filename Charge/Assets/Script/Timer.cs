@@ -3,21 +3,30 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] GameObject end;
-    [SerializeField] Text text;
-    [SerializeField] float time = 20f;
+    [SerializeField] GameObject endPanel;
+    [SerializeField] GameObject fillParts;
+    [SerializeField] Slider slider;
+    [SerializeField] float time;
+    [SerializeField] float startTime = 20f;
     [SerializeField] bool isStart = false;
+
+    private void Awake()
+    {
+        time = startTime;
+        slider.maxValue = startTime;
+    }
 
     private void FixedUpdate()
     {
-        text.text = $"Time:{time}";
+        slider.value = time;
         if (isStart) { time -= Time.deltaTime; }
 
         if (time <= 0)
         {
             isStart = false;
             time = 0;
-            end.SetActive(true);
+            endPanel.SetActive(true);
+            fillParts.SetActive(false);
         }
 
     }

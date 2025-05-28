@@ -5,7 +5,7 @@ public class ScoreText : MonoBehaviour
 {
     [SerializeField] Text text;
     [SerializeField] Timer timer;
-    [SerializeField] Text powerText;
+    [SerializeField] Slider slider;
     [SerializeField] int score = 0;
     [SerializeField] int timeAddScore = 0;
     Ammo ammo;
@@ -18,7 +18,7 @@ public class ScoreText : MonoBehaviour
     void Update()
     {
         text.text = $"Score:{score}";
-        powerText.text = $"Power:{power}";
+        slider.value = power;
         ammo = GameObject.FindAnyObjectByType<Ammo>();
         if (!ammo){ power = 0; }
         else { power = ammo._sendPowerText; }

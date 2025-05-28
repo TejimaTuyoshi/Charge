@@ -64,7 +64,7 @@ public class Ammo : MonoBehaviour
             Destroy(target.gameObject);
             Destroy(gameObject);
         }
-        else if (this.transform.position.y <= 0)
+        else if (this.transform.position.y <= 0 || this.transform.position.x <= -50)
         {
             soundManager.Miss();
             Destroy(gameObject);
@@ -75,7 +75,7 @@ public class Ammo : MonoBehaviour
     {
         if (_isHold)
         {
-            _power += 0.1f;
+            _power += 0.5f;
             _sendPowerText = _power;
         }
         else if (_isRemove)
@@ -83,6 +83,12 @@ public class Ammo : MonoBehaviour
             _isRemove = false;
             rb.AddForce(-_power, _power / 3, 0, ForceMode.Impulse);
             _power = 0;
+        }
+
+        if (_power >= 100) 
+        { 
+            _power = 100;
+            _isHold = false;
         }
     }
 
