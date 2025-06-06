@@ -8,7 +8,7 @@ public class EndPanel : MonoBehaviour
     [SerializeField] Text score;
     void Start()
     {
-        text.transform.position = new Vector2 (540,500);
+        text.transform.position = new Vector2 (650,450);
         score.fontSize = 200;
     }
 

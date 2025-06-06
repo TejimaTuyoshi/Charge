@@ -21,7 +21,7 @@ public class ScoreText : MonoBehaviour
         slider.value = power;
         ammo = GameObject.FindAnyObjectByType<Ammo>();
         if (!ammo){ power = 0; }
-        else { power = ammo._sendPowerText; }
+        else { power = ammo._sendPower; }
 
         if (timeAddScore >= 5)
         {

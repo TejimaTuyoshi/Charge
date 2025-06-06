@@ -14,7 +14,7 @@ public class Ammo : MonoBehaviour
     [SerializeField] bool _isRemove = false;
     [SerializeField] bool _isReload = false;
     private float _power;
-    public float _sendPowerText;
+    public float _sendPower;
     Rigidbody rb;
     Transform _targetTransform;
     Vector3 _distance = new Vector3(0,0,0);
@@ -76,7 +76,7 @@ public class Ammo : MonoBehaviour
         if (_isHold)
         {
             _power += 0.5f;
-            _sendPowerText = _power;
+            _sendPower = _power;
         }
         else if (_isRemove)
         {
@@ -85,9 +85,9 @@ public class Ammo : MonoBehaviour
             _power = 0;
         }
 
-        if (_power >= 100) 
+        if (_power >= 50) 
         { 
-            _power = 100;
+            _power = 50;
             _isHold = false;
         }
     }
@@ -112,4 +112,5 @@ public class Ammo : MonoBehaviour
         }
     }
     public void StartGame() {_isStart = true ;}
+    public void FinishGame() { _isStart = false; }
 }

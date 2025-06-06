@@ -32,7 +32,7 @@ public class AmmoSpawn : MonoBehaviour
         typeText.text = $"NextType:{ammos}";
         if (isReload)
         {
-            if (ammos == InstanceAmmos.Simple){ Instantiate(simpleAmmo, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity); }
+            if (ammos == InstanceAmmos.Simple) { Instantiate(simpleAmmo, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity); }
             else if (ammos == InstanceAmmos.Light) { Instantiate(lightAmmo, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity); }
             else if (ammos == InstanceAmmos.Heavy) { Instantiate(heavyAmmo, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity); }
             isReload = false;
@@ -54,4 +54,5 @@ public class AmmoSpawn : MonoBehaviour
         }
     }
     public void Ready() { isReady = true; }
+    public void Finish() { isReady = false; }
 }

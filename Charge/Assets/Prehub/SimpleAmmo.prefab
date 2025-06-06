@@ -127,7 +127,8 @@ MonoBehaviour:
   _isHold: 0
   _isRemove: 0
   _isReload: 0
-  _sendPowerText: 0
+  _sendPower: 0
+  _sendMaxPower: 50
 --- !u!54 &900475278405563414
 Rigidbody:
   m_ObjectHideFlags: 0
