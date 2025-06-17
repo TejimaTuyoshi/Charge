@@ -25,7 +25,7 @@ public class ScoreText : MonoBehaviour
 
         if (timeAddScore >= 5)
         {
-            timer.Add();
+            timer.AddTime();
             timeAddScore = 0;
         }
         if (isReload)

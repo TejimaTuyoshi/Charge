@@ -11,7 +11,6 @@ public class Timer : MonoBehaviour
     [SerializeField] float time;
     [SerializeField] float startTime = 20f;
     [SerializeField] bool isStart = false;
-    [SerializeField] bool isFinish = false;
 
 
     private void Awake()
@@ -37,7 +36,7 @@ public class Timer : MonoBehaviour
 
     }
 
-    public void Add(){ time += 5f; }
+    public void AddTime(){ time += 5f; }//ˆê’è‚Ì“¾“_‚É’B‚µ‚½Û‚Éì“®‚·‚é
 
     public void ST(){ isStart = true; }
 
