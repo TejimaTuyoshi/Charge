@@ -123,12 +123,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hold: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  _reload: {fileID: -6421287811308203100, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   _isStart: 0
+  _isShot: 0
   _isHold: 0
   _isRemove: 0
   _isReload: 0
   _sendPower: 0
-  _sendMaxPower: 50
 --- !u!54 &900475278405563414
 Rigidbody:
   m_ObjectHideFlags: 0

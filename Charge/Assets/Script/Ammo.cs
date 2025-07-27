@@ -9,7 +9,9 @@ public class Ammo : MonoBehaviour
     Target target;
     SoundManager soundManager;
     [SerializeField] private InputActionReference _hold;
-    [SerializeField] bool _isStart = false;
+    [SerializeField] private InputActionReference _reload;
+    [SerializeField] bool _isStart = false;//ゲーム開始までの間に動かないように停止。
+    [SerializeField] bool _isShot = false;//一度発射した場合、二度以降飛ばないようにする。
     [SerializeField] bool _isHold = false;
     [SerializeField] bool _isRemove = false;
     [SerializeField] bool _isReload = false;
@@ -22,6 +24,10 @@ public class Ammo : MonoBehaviour
     {
         //InputSystemを採用
         if (_hold == null) return;
+        if (_reload == null) return;
+
+        _reload.action.canceled += OnReload;
+        _reload.action.Enable();
 
         _hold.action.performed += OnHold;
         _hold.action.canceled += OffHold;
@@ -68,21 +74,34 @@ public class Ammo : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isHold)
+        if (_isShot == false)
         {
-            _power += 0.5f;
-            _sendPower = _power;
+            if (_isHold)
+            {
+                _power += 0.5f;
+                _sendPower = _power;
+            }
+            else if (_isRemove)
+            {
+                _isRemove = false;
+                _isShot = true;
+                rb.AddForce(-_power, _power / 3, 0, ForceMode.Impulse);
+                _power = 0;
+            }
         }
-        else if (_isRemove)
+        else
         {
-            _isRemove = false;
-            rb.AddForce(-_power, _power / 3, 0, ForceMode.Impulse);
-            _power = 0;
+            if (_isReload)
+            {
+                Destroy(gameObject);
+                _isReload = false;
+            }
         }
 
+
         //パワーの上限を決めることでAddForceでの挙動が変にならないようにする
-        if (_power >= 50) 
-        { 
+        if (_power >= 50)
+        {
             _power = 50;
             _isHold = false;
         }
@@ -101,6 +120,8 @@ public class Ammo : MonoBehaviour
         _isRemove = true;
         if (_isStart){ soundManager.Shot(); }
     }
+
+    private void OnReload(InputAction.CallbackContext context){ _isReload = true; }
     public void StartGame() {_isStart = true ;}
     public void FinishGame() { _isStart = false; }
 }
